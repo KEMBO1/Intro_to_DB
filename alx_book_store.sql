@@ -1,78 +1,45 @@
-
 CREATE DATABASE IF NOT EXISTS alx_book_store;
+USE alx_book_store;
 
+CREATE TABLE Authors (
+    author_id  INT PRIMARY KEY AUTO_INCREMENT,
+    author_name VARCHAR(215) NOT NULL
+);
 
-USE `alx_book_store`;
+CREATE TABLE Books (
+    book_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(130) NOT NULL,
+    author_id  INT,
+    price DOUBLE,
+    publication_date DATE,
+    FOREIGN KEY (author_id ) REFERENCES Authors (author_id )
+);
 
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_name VARCHAR(215) NOT NULL,
+    email VARCHAR(215),
+    address TEXT
+);
 
-DROP TABLE IF EXISTS `AUTHORS`;
-CREATE TABLE `Authors` (
-  `author_id` int NOT NULL AUTO_INCREMENT,
-  `author_name` varchar(215) NOT NULL,
-  PRIMARY KEY (`author_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO Customers (customer_id, customer_name, email, address) VALUES 
+(1, 'Cole Baidoo', 'cbaidoo@sandtech.com', '123 Happiness Ave.'),
+(2, 'Blessing Malik', 'bmalik@sandtech.com', '124 Happiness Ave.'),
+(3, 'Obed Ehoneah', 'eobed@sandtech.com', '125 Happiness Ave.'),
+(4, 'Nehemial Kamolu', 'nkamolu@sandtech.com', '126 Happiness Ave.');
 
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    order_date DATE,
+    FOREIGN KEY (customer_id) REFERENCES Customers (customer_id)
+);
 
-LOCK TABLES `authors` WRITE;
-UNLOCK TABLES;
-
-DROP TABLE IF EXISTS `BOOKS`;
-CREATE TABLE `Books` (
-  `BOOK_ID` int NOT NULL AUTO_INCREMENT,
-  `TITLE` varchar(130) NOT NULL,
-  `AUTHOR_ID` int DEFAULT NULL,
-  `PRICE` double DEFAULT NULL,
-  `PUBLICATION_DATE` date DEFAULT NULL,
-  PRIMARY KEY (`BOOK_ID`),
-  KEY `AUTHOR_ID` (`AUTHOR_ID`),
-  CONSTRAINT `books_ibfk_1` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `authors` (`AUTHOR_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-LOCK TABLES `books` WRITE;
-UNLOCK TABLES;
-
-
-DROP TABLE IF EXISTS `CUSTOMERS`;
-CREATE TABLE `CUSTOMERS` (
-  `CUSTOMER_ID` int NOT NULL AUTO_INCREMENT,
-  `CUSTOMER_NAME` varchar(215) NOT NULL,
-  `EMAIL` varchar(215) DEFAULT NULL,
-  `ADDRESS` text,
-  PRIMARY KEY (`CUSTOMER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-
-LOCK TABLES `customers` WRITE;
-INSERT INTO `customers` VALUES (1,'Cole Baidoo','cbaidoo@sandtech.com','123 Happiness Ave.'),(2,'Blessing Malik','bmalik@sandtech.com','124 Happiness Ave.'),(3,'Obed Ehoneah','eobed@sandtech.com','125 Happiness Ave.'),(4,'Nehemial Kamolu','nkamolu@sandtech.com','126 Happiness Ave.');
-UNLOCK TABLES;
-
-DROP TABLE IF EXISTS `ORDER DETAILS`;
-CREATE TABLE `ORDER DETAILS` (
-  `ORDERDETAILID` int NOT NULL AUTO_INCREMENT,
-  `ORDER_ID` int DEFAULT NULL,
-  `BOOK_ID` int DEFAULT NULL,
-  `QUANTITY` double DEFAULT NULL,
-  PRIMARY KEY (`ORDERDETAILID`),
-  KEY `ORDER_ID` (`ORDER_ID`),
-  KEY `BOOK_ID` (`BOOK_ID`),
-  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`ORDER_ID`) REFERENCES `orders` (`ORDER_ID`),
-  CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`BOOK_ID`) REFERENCES `books` (`BOOK_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-LOCK TABLES `order_details` WRITE;
-UNLOCK TABLES;
-
-
-DROP TABLE IF EXISTS `ORDERS`;
-CREATE TABLE `ORDERS` (
-  `ORDER_ID` int NOT NULL AUTO_INCREMENT,
-  `CUSTOMER_ID` int DEFAULT NULL,
-  `ORDER_DATE` date DEFAULT NULL,
-  PRIMARY KEY (`ORDER_ID`),
-  KEY `CUSTOMER_ID` (`CUSTOMER_ID`),
-  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `customers` (`CUSTOMER_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-LOCK TABLES `orders` WRITE;
-UNLOCK TABLES;
-
+CREATE TABLE Order_Details (
+    orderdetailid INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    book_id INT,
+    quantity DOUBLE,
+    FOREIGN KEY (order_id) REFERENCES Orders (order_id),
+    FOREIGN KEY (book_id) REFERENCES Books (book_id)
+);
