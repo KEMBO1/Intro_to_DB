@@ -27,10 +27,10 @@ USE `alx_book_store`;
 -- Table structure for table `authors`
 --
 
-DROP TABLE IF EXISTS `authors`;
+DROP TABLE IF EXISTS `AUTHORS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `authors` (
+CREATE TABLE `AUTHORS` (
   `AUTHOR_ID` int NOT NULL AUTO_INCREMENT,
   `AUTHOR_NAME` varchar(215) NOT NULL,
   PRIMARY KEY (`AUTHOR_ID`)
@@ -50,10 +50,10 @@ UNLOCK TABLES;
 -- Table structure for table `books`
 --
 
-DROP TABLE IF EXISTS `books`;
+DROP TABLE IF EXISTS `BOOKS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `books` (
+CREATE TABLE `BOOKS` (
   `BOOK_ID` int NOT NULL AUTO_INCREMENT,
   `TITLE` varchar(130) NOT NULL,
   `AUTHOR_ID` int DEFAULT NULL,
@@ -78,10 +78,10 @@ UNLOCK TABLES;
 -- Table structure for table `customers`
 --
 
-DROP TABLE IF EXISTS `customers`;
+DROP TABLE IF EXISTS `CUSTOMERS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customers` (
+CREATE TABLE `CUSTOMERS` (
   `CUSTOMER_ID` int NOT NULL AUTO_INCREMENT,
   `CUSTOMER_NAME` varchar(215) NOT NULL,
   `EMAIL` varchar(215) DEFAULT NULL,
@@ -104,10 +104,10 @@ UNLOCK TABLES;
 -- Table structure for table `order_details`
 --
 
-DROP TABLE IF EXISTS `order_details`;
+DROP TABLE IF EXISTS `ORDER DETAILS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `order_details` (
+CREATE TABLE `ORDER DETAILS` (
   `ORDERDETAILID` int NOT NULL AUTO_INCREMENT,
   `ORDER_ID` int DEFAULT NULL,
   `BOOK_ID` int DEFAULT NULL,
@@ -133,10 +133,10 @@ UNLOCK TABLES;
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `ORDERS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `orders` (
+CREATE TABLE `ORDERS` (
   `ORDER_ID` int NOT NULL AUTO_INCREMENT,
   `CUSTOMER_ID` int DEFAULT NULL,
   `ORDER_DATE` date DEFAULT NULL,
