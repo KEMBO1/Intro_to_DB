@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS `AUTHORS`;
 CREATE TABLE `Authors` (
   `author_id` int NOT NULL AUTO_INCREMENT,
   `author_name` varchar(215) NOT NULL,
-  PRIMARY KEY (`AUTHOR_ID`)
+  PRIMARY KEY (`author_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
